@@ -7,15 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDFWhmLYN4UaqfETo-E0M7oJM9NMDSJqEk",
-  authDomain: "tinder-2-1a70d.firebaseapp.com",
-  projectId: "tinder-2-1a70d",
-  storageBucket: "tinder-2-1a70d.appspot.com",
-  messagingSenderId: "463366353489",
-  appId: "1:463366353489:web:b4745e951074b2af113e70",
+  // ... paste firebase credentials here ...
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-export { auth };
+const db = getFirestore();
+
+export { auth, db };

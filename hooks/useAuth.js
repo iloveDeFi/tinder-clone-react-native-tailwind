@@ -14,6 +14,7 @@ import {
   signInWithCredential,
   signOut,
 } from "@firebase/auth";
+import * as RootNavigation from "../RootNavigation";
 
 const AuthContext = createContext({});
 
@@ -21,6 +22,7 @@ const config = {
   androidClientId:
     "463366353489-rpj8e62kefof9oaam8lbs36mumdi79sq.apps.googleusercontent.com",
   iosClientId:
+    // hidestream
     "463366353489-kdml80k5movt2lrcj5ik9oai61ptdq95.apps.googleusercontent.com",
   scopes: ["profile", "email"],
   permissions: ["public_profile", "email", "gender", "location"],
@@ -48,7 +50,7 @@ export function AuthProvider({ children }) {
   const signInWithGoogle = async () => {
     setLoading(true);
 
-    Google.logInAsync(config)
+    await Google.logInAsync(config)
       .then(async (logInResult) => {
         if (logInResult.type === "success") {
           const { idToken, accessToken } = logInResult;
@@ -57,8 +59,7 @@ export function AuthProvider({ children }) {
             accessToken
           );
 
-          const user = await signInWithCredential(auth, credential);
-          setUser(user);
+          await signInWithCredential(auth, credential);
         }
         return Promise.reject(); // Or handle user cancelation separatedly
       })
